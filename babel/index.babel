@@ -1,0 +1,75 @@
+//Renders carriage return as a line break
+marked.setOptions({
+   breaks: true
+ });
+
+let placeholder = 
+   `# this is a h1 
+
+   ## this is a h2
+
+   [I'm an inline-style link](https://www.google.com)
+
+   \`<p>This is <em>Raw</em> HTML</p>\`
+
+   \`\`\`
+    var s = "JavaScript syntax highlighting";
+   \`\`\`
+   
+   * This is a list item
+   
+
+   > Blockquotes are very handy in email to emulate reply text.
+   > This line is part of the same quote.
+
+   ![alt text](https://bit.ly/2qro4js "Logo Title Text 1")
+
+   **This is bold text**
+  `
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      input: placeholder
+    }
+    
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(e){
+    placeholder = e.target.value;
+    this.setState({
+      input: placeholder
+    });
+  }
+
+render(){
+  return (
+   <div>
+    <p className="header">Editor</p>
+    <textarea id="editor" onKeyUp={this.handleChange}>
+      {this.state.input}
+     </textarea>
+    <Preview input={this.state.input}/>
+   </div>
+   )
+ }
+}
+
+//PREVIEW SECTION
+class Preview extends React.Component {
+  render(){
+      function createMarkup() {
+       return {__html: marked(placeholder)};
+      }
+    return (
+     <div id="preview-container">
+      <p className="header">Previewer</p>
+      <div id="preview"  dangerouslySetInnerHTML={createMarkup()}></div>
+    </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById("root"));

@@ -1,0 +1,31 @@
+body {
+  text-align: center;
+  font-family: courier;
+  padding-top: 50px;
+}
+
+#editor {
+  height: 200px;
+  width: 50%;
+  resize: none;
+}
+
+.header {
+  background: #EB2A20;
+  width: 50%;
+  margin: auto;
+  padding: 5px;
+  color: #ffe;
+}
+
+#preview {
+  width: 75%;
+  height: 500px;
+  outline: 2px solid #969594;
+  margin: 5px auto;
+}
+
+#preview-container > p {
+  width: 75%;
+  margin-top: 25px;
+}
